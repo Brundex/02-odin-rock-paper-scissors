@@ -29,28 +29,27 @@ function computerPlay(){
 }
 let playerScore = 0;
 let computerScore = 0;
-function playRound(playerSelection, computerSelection){
-    promptUntilValid(playerSelection);
-    computerSelection = computerPlay();
+function playRound(playerSelection=promptUntilValid(), computerSelection=computerPlay()){
     console.log(playerSelection);
     console.log(computerSelection);
     declareWinner(playerSelection, computerSelection);
 }
 
-playRound(promptUntilValid(), "PAPER");
 
-//helper function
+
+//helper function to get valid value
 function promptUntilValid(playerSelection){
     invalidValue = true;
     while(invalidValue){
         playerSelection = prompt("Rock, Paper, Scissors?").toUpperCase();
         if (playerSelection === "ROCK" || playerSelection === "PAPER" || playerSelection === "SCISSORS"){
+            invalidValue = false;
             return playerSelection;
         }
     }
 }
 
-//helper function
+//helper function to figure out winner
 function declareWinner(playerSelection, computerSelection){
     switch(playerSelection) {
         case "ROCK":
