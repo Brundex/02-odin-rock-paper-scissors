@@ -27,13 +27,42 @@ function computerPlay(){
             return computerChoice;
     }
 }
-let playerScore = 0;
-let computerScore = 0;
+
 function playRound(playerSelection=promptUntilValid(), computerSelection=computerPlay()){
     console.log(playerSelection);
     console.log(computerSelection);
-    declareWinner(playerSelection, computerSelection);
+    winner = declareWinner(playerSelection, computerSelection);
 }
+
+function game() {
+    let playerScore = 0;
+    let computerScore = 0;
+    let i = 0;
+    while(i !== 5){
+        playRound()
+        console.log(i);
+        if (winner === "player"){
+            playerScore++;
+            i++;
+        }
+        else if (winner === "computer"){
+            computerScore++;
+            i++;
+        }
+        console.log(`You: ${playerScore}; Me: ${computerScore}`);
+        if (computerScore === 3){
+            console.log("You lose!");
+            break;
+        }
+        if (playerScore === 3){
+            console.log("You win!");
+            break;
+        }
+     }
+}
+
+game();
+
 
 
 
@@ -55,48 +84,42 @@ function declareWinner(playerSelection, computerSelection){
         case "ROCK":
             if(computerSelection == "ROCK"){
                 console.log("It's a tie!");
-                break;
+                return "tie";
             }
             else if(computerSelection == "PAPER"){
                 console.log("Ha! Got ya!");
-                computerScore++;
-                break;
+                return "computer";
             }
             else{
                 console.log("Ouch! Easy!");
-                playerScore++;
-                break;
+                return "player";
             }
         case "PAPER":
             if(computerSelection == "ROCK"){
                 console.log("Ouch! Easy!");
-                playerScore++;
-                break;
+                return "player";
             }
             else if(computerSelection == "PAPER"){
                 console.log("It's a tie!");     
-                break;           
+                return "tie";         
             }
             else{
                 console.log("Ha! Got ya!");
-                computerScore++;
-                break;
+                return "computer";
             }
 
         case "SCISSORS":
             if(computerSelection == "ROCK"){
                 console.log("Ha! Got ya!");
-                computerScore++;
-                break;
+                return "computer";
             }
             else if(computerSelection == "PAPER"){
                 console.log("Ouch! Easy!");
-                playerScore++;
-                break;
+                return "player";
             }
             else{
                 console.log("It's a tie!");
-                break;
+                return "tie";
             }
     }
 }
