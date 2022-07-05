@@ -107,17 +107,27 @@ resetBtn.addEventListener('click', () => {
  })
 
  function playRound(e) {
-    if (computerScore < 5 && playerScore < 5){
+    if (computerScore < 5 && playerScore <= 5){
         playerSelection = e.target.id;
         computerSelection = computerPlay();
         winner = declareWinner(playerSelection, computerSelection);
         if (winner === "player"){
             playerScore++;
+            if (playerScore === 5){
+                pointWinnerDiv.textContent = "You win the game!";
+                playerScoreDiv.textContent = `Player Score: ${playerScore}`;
+                return;
+            }
             console.log(playerScore);
             console.log(computerScore);
         }
         else if (winner === "computer"){
             computerScore++;
+            if (computerScore === 5){
+                pointWinnerDiv.textContent = "I win the game!";
+                computerScoreDiv.textContent = `Computer Score: ${computerScore}`;
+                return;
+            }
             console.log(playerScore);
             console.log(computerScore); 
         }
@@ -130,12 +140,11 @@ resetBtn.addEventListener('click', () => {
     else if (playerScore === 5){
         playerScoreDiv.textContent = "";
         computerScoreDiv.textContent = "";
-        pointWinnerDiv.textContent = "You win!";
+        
     }
     else if (computerScore === 5){
         playerScoreDiv.textContent = "";
         computerScoreDiv.textContent = "";
-        pointWinnerDiv.textContent = "I win!";
     }
 
 }
